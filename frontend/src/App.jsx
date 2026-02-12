@@ -12,6 +12,8 @@ import SectorDetail from "./components/pages/SectorDetail";
 import Customization from "./components/pages/Customization";
 import Contact from "./components/pages/Contact";
 
+import FloatingEtsy from "./components/ui/FloatingEtsy";
+
 function App() {
   return (
     <GlobalStateProvider>
@@ -31,6 +33,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <FloatingEtsy />
         </div>
       </Router>
     </GlobalStateProvider>

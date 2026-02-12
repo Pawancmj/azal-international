@@ -27,7 +27,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-slate-50 dark:bg-slate-950 transition-colors text-slate-600 dark:text-slate-300 border-t border-slate-200 dark:border-slate-800">
+    <footer className="bg-slate-100 dark:bg-slate-950 transition-colors text-slate-600 dark:text-slate-300 border-t border-slate-200 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -37,7 +37,7 @@ const Footer = () => {
               <img
                 src={logo}
                 alt="Azal Logo"
-                className="h-20 w-auto object-contain"
+                className="h-16 w-16 object-cover rounded-full border border-slate-200 dark:border-slate-800"
               />
             </div>
             <p className="text-sm text-slate-800 dark:text-gray-400 mb-4">
@@ -46,18 +46,17 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                href="https://azalinternational.etsy.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-gold-500 transition-colors"
+                className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gold-500 hover:scale-110 transition-transform overflow-hidden shadow-sm"
+                title="Etsy Shop"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
+                <img
+                  src="https://logos-world.net/wp-content/uploads/2020/12/Etsy-Emblem.png"
+                  alt="Etsy Logo"
+                  className="w-full h-full object-contain"
+                />
               </a>
               <a
                 href="https://www.instagram.com/azalinternationall?igsh=MWV1ZmV4MDQ0Y3d1OA=="

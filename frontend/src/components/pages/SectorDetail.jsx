@@ -1,5 +1,6 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEO from "../ui/SEO";
+import ScrollReveal from "../ui/ScrollReveal";
 
 const SectorDetail = () => {
   const { sectorName } = useParams();
@@ -92,7 +93,12 @@ const SectorDetail = () => {
   const sector = sectorData[sectorName] || sectorData.hospitality;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors pt-20 animate-blur-in">
+    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors pt-20">
+      <SEO
+        title={`${sector.name} Solutions`}
+        description={`Azal International provides premium ${sector.name.toLowerCase()} carpet solutions. ${sector.intro}`}
+        keywords={`${sector.name.toLowerCase()} carpets, ${sector.name.toLowerCase()} flooring, custom ${sector.name.toLowerCase()} rugs`}
+      />
       {/* Hero Section */}
       <div className="relative h-96 overflow-hidden">
         <img
@@ -114,42 +120,51 @@ const SectorDetail = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Introduction */}
-        <section className="mb-16">
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-6 animate-reveal">Introduction</h2>
-          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{sector.intro}</p>
-        </section>
-
-        {/* Design Approach */}
-        <section className="mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 animate-reveal">Our Design Approach</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {sector.designApproach.map((approach, index) => (
-              <div key={index} className="flex items-start space-x-4 bg-slate-50 dark:bg-slate-900 p-6 rounded-lg animate-fade-in-up">
-                <svg className="w-6 h-6 text-gold-600 dark:text-gold-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <p className="text-slate-700 dark:text-slate-300">{approach}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Related Projects */}
-        {sector.relatedProjects.length > 0 && (
+        <ScrollReveal>
           <section className="mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Related Projects</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sector.relatedProjects.map((project, index) => (
-                <div key={index} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden">
-                  <img src={project.image} alt={project.name} className="w-full h-64 object-cover" />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{project.name}</h3>
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-6 animate-reveal">Introduction</h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{sector.intro}</p>
+          </section>
+        </ScrollReveal>
+
+        <ScrollReveal threshold={0.1}>
+          <section className="mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 animate-reveal">Our Design Approach</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {sector.designApproach.map((approach, index) => (
+                <ScrollReveal key={index} animation="scroll-reveal-up" className={`transition-delay-${index * 100}`}>
+                  <div className="flex items-start space-x-4 bg-slate-50 dark:bg-slate-900 p-6 rounded-lg h-full">
+                    <svg className="w-6 h-6 text-gold-600 dark:text-gold-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <p className="text-slate-700 dark:text-slate-300">{approach}</p>
                   </div>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </section>
+        </ScrollReveal>
+
+        {sector.relatedProjects.length > 0 && (
+          <ScrollReveal>
+            <section className="mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Related Projects</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {sector.relatedProjects.map((project, index) => (
+                  <ScrollReveal key={index} animation="scroll-reveal" className={`transition-delay-${index * 200}`}>
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden group h-full">
+                      <div className="relative h-64 overflow-hidden">
+                        <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{project.name}</h3>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </section>
+          </ScrollReveal>
         )}
 
         {/* Inquiry Button */}

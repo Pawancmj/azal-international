@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import SEO from "../ui/SEO";
+import ScrollReveal from "../ui/ScrollReveal";
 
 const Projects = () => {
   const [filters, setFilters] = useState({
@@ -53,8 +55,15 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
+      <SEO
+        title="Our Projects"
+        description="Explore Azal International's portfolio of premium carpet installations worldwide, from Grand Hyatt Dubai to luxury villas in New York."
+        keywords="carpet projects, luxury hotel flooring, residential carpet installations, commercial flooring portfolio"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Our Projects</h1>
+        <ScrollReveal>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Our Projects</h1>
+        </ScrollReveal>
 
         <div className="mb-8 flex flex-wrap gap-4">
           <select
@@ -108,7 +117,7 @@ const Projects = () => {
               />
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded-full text-sm">
+                  <span className="px-3 py-1 bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400 rounded-full text-sm">
                     {project.sector}
                   </span>
                   <span className="text-gray-500 dark:text-gray-400 text-sm">{project.year}</span>
@@ -121,7 +130,7 @@ const Projects = () => {
                   {project.carpetUsed}
                 </p>
                 <p className="text-slate-700 dark:text-slate-300 mb-4">{project.description}</p>
-                <button className="w-full py-2 bg-gold-600 text-white rounded-lg hover:bg-blue-700">
+                <button className="w-full py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors">
                   View Details
                 </button>
               </div>

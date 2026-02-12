@@ -1,5 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import SEO from "../ui/SEO";
+import ScrollReveal from "../ui/ScrollReveal";
 
 const Home = () => {
   // Sample data - replace with actual data from API
@@ -69,13 +70,18 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Home"
+        description="AZAL International - Premium carpets and flooring solutions for hospitality, residential, and commercial spaces worldwide. Explore our luxury collections today."
+        keywords="luxury carpets, premium flooring, dubai carpets, global flooring solutions, Azal International"
+      />
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center bg-slate-900 text-white overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="http://diningandlivingroom.com/wp-content/uploads/2017/06/8-Dining-Room-Tables-Perfect-for-a-Luxury-Set4.jpg?w=1920"
             alt="Luxury carpet background"
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-15"
           />
         </div>
 
@@ -116,29 +122,108 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Preview Section */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 animate-reveal">
-                Crafting Excellence Since 1990
+      <ScrollReveal>
+        <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6 animate-reveal">
+                  Crafting Excellence Since 1990
+                </h2>
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 animate-fade-in-up">
+                  AZAL International has been a leader in premium carpet
+                  manufacturing, combining traditional craftsmanship with modern
+                  innovation to deliver exceptional flooring solutions worldwide.
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 mb-8 animate-fade-in-up animation-delay-1000">
+                  Our commitment to quality, sustainability, and customer
+                  satisfaction has made us the preferred choice for hospitality,
+                  residential, and commercial projects globally.
+                </p>
+                <Link
+                  to="/about"
+                  className="inline-flex items-center px-6 py-3 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all transform hover:translate-x-1 animate-fade-in-up animation-delay-2000"
+                >
+                  Learn More About Us
+                  <svg
+                    className="w-5 h-5 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <img
+                  src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=300"
+                  alt="Carpet detail"
+                  className="rounded-lg shadow-lg"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=300"
+                  alt="Manufacturing"
+                  className="rounded-lg shadow-lg mt-8"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal threshold={0.05}>
+        <section className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Featured Collections
               </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 animate-fade-in-up">
-                AZAL International has been a leader in premium carpet
-                manufacturing, combining traditional craftsmanship with modern
-                innovation to deliver exceptional flooring solutions worldwide.
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Discover our curated selection of premium carpets
               </p>
-              <p className="text-gray-600 dark:text-gray-400 mb-8 animate-fade-in-up animation-delay-1000">
-                Our commitment to quality, sustainability, and customer
-                satisfaction has made us the preferred choice for hospitality,
-                residential, and commercial projects globally.
-              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {featuredCollections.map((collection, idx) => (
+                <ScrollReveal key={collection.id} animation="scroll-reveal-up" className={`transition-delay-${idx * 200}`}>
+                  <div
+                    className="group bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={collection.image}
+                        alt={collection.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          <button className="w-full py-2 bg-white dark:bg-gray-800 dark:text-white text-gray-900 rounded-lg font-semibold">
+                            Quick View
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                        {collection.name}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400">{collection.description}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+            <div className="text-center mt-12">
               <Link
-                to="/about"
-                className="inline-flex items-center px-6 py-3 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all transform hover:translate-x-1 animate-fade-in-up animation-delay-2000"
+                to="/collections"
+                className="inline-flex items-center px-8 py-3 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all transform hover:scale-105"
               >
-                Learn More About Us
+                View All Collections
                 <svg
                   className="w-5 h-5 ml-2"
                   fill="none"
@@ -154,198 +239,126 @@ const Home = () => {
                 </svg>
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <img
-                src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=300"
-                alt="Carpet detail"
-                className="rounded-lg shadow-lg"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=300"
-                alt="Manufacturing"
-                className="rounded-lg shadow-lg mt-8"
-              />
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
-      {/* Featured Collections Section */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Featured Collections
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Discover our curated selection of premium carpets
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredCollections.map((collection) => (
-              <div
-                key={collection.id}
-                className="group bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={collection.image}
-                    alt={collection.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <button className="w-full py-2 bg-white dark:bg-gray-800 dark:text-white text-gray-900 rounded-lg font-semibold">
-                        Quick View
-                      </button>
+      <ScrollReveal>
+        <section className="py-20 bg-white dark:bg-slate-950 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Featured Projects
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Showcasing our finest installations worldwide
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {featuredProjects.map((project, idx) => (
+                <ScrollReveal key={project.id} animation="scroll-reveal" className={`transition-delay-${idx * 200}`}>
+                  <div
+                    className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
+                  >
+                    <div className="relative h-56">
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-4 right-4 px-3 py-1 bg-gold-600 text-white text-sm rounded-full">
+                        {project.sector}
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                        {project.name}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        {project.location}
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                    {collection.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">{collection.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              to="/collections"
-              className="inline-flex items-center px-8 py-3 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all transform hover:scale-105"
-            >
-              View All Collections
-              <svg
-                className="w-5 h-5 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section className="py-20 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Showcasing our finest installations worldwide
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
-              >
-                <div className="relative h-56">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-gold-600 text-white text-sm rounded-full">
-                    {project.sector}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                    {project.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 flex items-center">
-                    <svg
-                      className="w-4 h-4 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    {project.location}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              to="/projects"
-              className="inline-flex items-center px-8 py-3 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all transform hover:scale-105"
-            >
-              View All Projects
-              <svg
-                className="w-5 h-5 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Sectors Preview */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4 animate-reveal">Industries We Serve</h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 animate-fade-in-up">
-              Specialized solutions for diverse sectors
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            {sectors.map((sector) => (
+                </ScrollReveal>
+              ))}
+            </div>
+            <div className="text-center mt-12">
               <Link
-                key={sector.name}
-                to={sector.path}
-                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 text-center transition-all hover:scale-105 hover:border-gold-500/50 group"
+                to="/projects"
+                className="inline-flex items-center px-8 py-3 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all transform hover:scale-105"
               >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{sector.icon}</div>
-                <h3 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-gold-600">{sector.name}</h3>
+                View All Projects
+                <svg
+                  className="w-5 h-5 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
               </Link>
-            ))}
+            </div>
           </div>
-          <div className="text-center mt-12">
-            <Link
-              to="/sectors"
-              className="inline-flex items-center px-8 py-3 bg-slate-900 dark:bg-gold-600 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-gold-700 transition-all transform hover:scale-105"
-            >
-              Explore All Sectors
-            </Link>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal threshold={0.2}>
+        <section className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4 animate-reveal">Industries We Serve</h2>
+              <p className="text-lg text-slate-600 dark:text-slate-400 animate-fade-in-up">
+                Specialized solutions for diverse sectors
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+              {sectors.map((sector, idx) => (
+                <ScrollReveal key={sector.name} animation="scroll-reveal-left" className={`transition-delay-${idx * 100}`}>
+                  <Link
+                    to={sector.path}
+                    className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 text-center transition-all hover:scale-105 hover:border-gold-500/50 group"
+                  >
+                    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{sector.icon}</div>
+                    <h3 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-gold-600">{sector.name}</h3>
+                  </Link>
+                </ScrollReveal>
+              ))}
+            </div>
+            <div className="text-center mt-12">
+              <Link
+                to="/sectors"
+                className="inline-flex items-center px-8 py-3 bg-slate-900 dark:bg-gold-600 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-gold-700 transition-all transform hover:scale-105"
+              >
+                Explore All Sectors
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Customization Preview Section */}
       <section className="py-20 bg-blue-50 dark:bg-blue-900/10 transition-colors">

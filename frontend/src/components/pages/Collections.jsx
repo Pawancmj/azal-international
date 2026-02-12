@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useGlobalState } from "../context/GlobalStateContext";
+import React, { useState } from "react";
 import QuickViewModal from "../ui/QuickViewModal";
+import SEO from "../ui/SEO";
+import ScrollReveal from "../ui/ScrollReveal";
+import { useGlobalState } from "../context/GlobalStateContext";
 
 const Collections = () => {
   const { searchQuery, setSearchQuery, filters, updateFilters, clearFilters } =
@@ -174,42 +176,49 @@ const Collections = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
+      <SEO
+        title="Collections"
+        description="Explore Azal International's diverse collection of premium carpets. From Royal Persian Heritage to Modern Geometric and Vintage Oriental rugs."
+        keywords="carpet collections, persian rugs, modern carpets, luxury rugs, online carpet shop"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Our Collections
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Discover our premium carpet collections crafted with excellence
-          </p>
-        </div>
-
-        {/* Search Bar */}
-        <div className="mb-6">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search by name, material, or tags..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-6 py-4 pl-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-500"
-            />
-            <svg
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+        <ScrollReveal>
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Our Collections
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Discover our premium carpet collections crafted with excellence
+            </p>
           </div>
-        </div>
+        </ScrollReveal>
+
+        <ScrollReveal animation="scroll-reveal-up" threshold={0.01}>
+          <div className="mb-6">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search by name, material, or tags..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-6 py-4 pl-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-500"
+              />
+              <svg
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+          </div>
+        </ScrollReveal>
 
         <div className="flex flex-row gap-3 lg:gap-8">
           {/* Filter Panel */}
@@ -219,7 +228,7 @@ const Collections = () => {
                 <h2 className="text-sm md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 md:mb-0">Filters</h2>
                 <button
                   onClick={() => clearFilters("collections")}
-                  className="text-xs md:text-sm text-gold-600 hover:text-primary-700 text-left md:text-right"
+                  className="text-xs md:text-sm text-gold-600 hover:text-gold-700 text-left md:text-right"
                 >
                   Clear All
                 </button>
@@ -263,7 +272,7 @@ const Collections = () => {
                         onChange={(e) =>
                           handleFilterChange("size", size, e.target.checked)
                         }
-                        className="w-3 h-3 md:w-4 md:h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
                       />
                       <span className="ml-2 text-xs md:text-base text-gray-700 dark:text-gray-400">{size} ft</span>
                     </label>
@@ -284,7 +293,7 @@ const Collections = () => {
                           onChange={(e) =>
                             handleFilterChange("color", color, e.target.checked)
                           }
-                          className="w-3 h-3 md:w-4 md:h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                          className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
                         />
                         <span className="ml-2 text-xs md:text-base text-gray-700 dark:text-gray-400">{color}</span>
                       </label>
@@ -348,7 +357,7 @@ const Collections = () => {
                         onChange={(e) =>
                           handleFilterChange("style", style, e.target.checked)
                         }
-                        className="w-3 h-3 md:w-4 md:h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
                       />
                       <span className="ml-2 text-xs md:text-base text-gray-700 dark:text-gray-400">{style}</span>
                     </label>
@@ -428,10 +437,10 @@ const Collections = () => {
                         {product.material} • {product.size}
                       </p>
                       <div className="mt-auto flex items-center justify-between">
-                        <span className="text-sm md:text-2xl font-bold text-primary-600 dark:text-primary-400">
+                        <span className="text-sm md:text-2xl font-bold text-gold-600 dark:text-gold-400">
                           ${product.price.toLocaleString()}
                         </span>
-                        <button className="hidden md:block px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        <button className="hidden md:block px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors text-sm">
                           View Details
                         </button>
                       </div>
