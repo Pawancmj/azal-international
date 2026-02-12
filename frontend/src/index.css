@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+    --color-gold-50: #fdfaf1;
+    --color-gold-100: #fbf2d3;
+    --color-gold-200: #f6e1a2;
+    --color-gold-300: #f1cc71;
+    --color-gold-400: #dfbd69;
+    --color-gold-500: #d4af37;
+    --color-gold-600: #aa8230;
+    --color-gold-700: #8a6723;
+    --color-gold-800: #6b4f1c;
+    --color-gold-900: #4a3713;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+body {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Fade In Animation for Heading */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-typewriter {
+    animation: fadeInScale 1.5s ease-out forwards;
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Animation Delays */
+.animation-delay-1000 {
+    animation-delay: 0.8s;
+}
+
+.animation-delay-2000 {
+    animation-delay: 1.3s;
+}
+
+/* Floating Particles */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float 4s ease-in-out 1s infinite;
+}
+
+.animate-float-slow {
+    animation: float 5s ease-in-out 0.5s infinite;
+}
+
+/* New Modern Animations */
+@keyframes reveal {
+    0% {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+    }
+
+    100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+.animate-reveal {
+    animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes blurIn {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+    }
+}
+
+.animate-blur-in {
+    animation: blurIn 1.2s ease-out forwards;
+}
+
+.hover-gold {
+    transition: all 0.3s ease;
+}
+
+.hover-gold:hover {
+    color: #d4af37;
+    transform: translateY(-2px);
+}
+
+.gold-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #aa8230 100%);
+}
+
+.gold-text-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #f1cc71 50%, #aa8230 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
