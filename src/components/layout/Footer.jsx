@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/azal-logo.jpeg";
+import etsyLogo from "../../assets/etsy-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -49,11 +50,11 @@ const Footer = () => {
                 href="https://azalinternational.etsy.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gold-500 hover:scale-110 transition-transform overflow-hidden shadow-sm"
+                className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-amber-500 hover:scale-110 transition-transform overflow-hidden shadow-sm"
                 title="Etsy Shop"
               >
                 <img
-                  src="https://logos-world.net/wp-content/uploads/2020/12/Etsy-Emblem.png"
+                  src={etsyLogo}
                   alt="Etsy Logo"
                   className="w-full h-full object-contain"
                 />
@@ -62,7 +63,7 @@ const Footer = () => {
                 href="https://www.instagram.com/azalinternationall?igsh=MWV1ZmV4MDQ0Y3d1OA=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-gold-500 transition-colors"
+                className="hover:text-amber-500 transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -76,7 +77,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/company/azal-internationall/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-gold-500 transition-colors"
+                className="hover:text-amber-500 transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -97,7 +98,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm hover:text-gold-500 transition-colors"
+                    className="text-sm hover:text-amber-500 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -114,7 +115,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm hover:text-gold-500 transition-colors"
+                    className="text-sm hover:text-amber-500 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -131,7 +132,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm hover:text-gold-500 transition-colors"
+                    className="text-sm hover:text-amber-500 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -154,11 +155,11 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-gold-500"
+                className="flex-1 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
               />
               <button
                 type="submit"
-                className="px-6 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
+                className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
               >
                 Subscribe
               </button>
@@ -175,19 +176,19 @@ const Footer = () => {
             <div className="flex space-x-6">
               <Link
                 to="/privacy"
-                className="text-sm text-slate-800 dark:text-gray-400 hover:text-gold-500 transition-colors"
+                className="text-sm text-slate-800 dark:text-gray-400 hover:text-amber-500 transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 to="/terms"
-                className="text-sm text-slate-800 dark:text-gray-400 hover:text-gold-500 transition-colors"
+                className="text-sm text-slate-800 dark:text-gray-400 hover:text-amber-500 transition-colors"
               >
                 Terms of Service
               </Link>
               <Link
                 to="/cookies"
-                className="text-sm text-slate-800 dark:text-gray-400 hover:text-gold-500 transition-colors"
+                className="text-sm text-slate-800 dark:text-gray-400 hover:text-amber-500 transition-colors"
               >
                 Cookie Policy
               </Link>
