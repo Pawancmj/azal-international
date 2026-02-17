@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SEO from "../ui/SEO";
-import ScrollReveal from "../ui/ScrollReveal";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
+  const containerRef = useRef(null);
   const [filters, setFilters] = useState({
     sector: "all",
     year: "all",
@@ -53,23 +58,47 @@ const Projects = () => {
     return true;
   });
 
+  useGSAP(() => {
+    // Header Animation
+    gsap.fromTo(".projects-header",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
+
+    // Filter Animation
+    gsap.fromTo(".projects-filters",
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.2 }
+    );
+
+    // Initial grid animation
+    gsap.fromTo(".project-card",
+      { y: 50, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 0.6, stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".projects-grid",
+          start: "top 85%",
+        }
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
+    <div ref={containerRef} className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
       <SEO
         title="Our Projects"
         description="Explore Azal International's portfolio of premium carpet installations worldwide, from Grand Hyatt Dubai to luxury villas in New York."
         keywords="carpet projects, luxury hotel flooring, residential carpet installations, commercial flooring portfolio"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <ScrollReveal>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Our Projects</h1>
-        </ScrollReveal>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 projects-header">Our Projects</h1>
 
-        <div className="mb-8 flex flex-wrap gap-4">
+        <div className="mb-8 flex flex-wrap gap-4 projects-filters">
           <select
             value={filters.sector}
             onChange={(e) => setFilters({ ...filters, sector: e.target.value })}
-            className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-500"
+            className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
           >
             <option value="all">All Sectors</option>
             <option value="Hospitality">Hospitality</option>
@@ -82,7 +111,7 @@ const Projects = () => {
           <select
             value={filters.year}
             onChange={(e) => setFilters({ ...filters, year: e.target.value })}
-            className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-500"
+            className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
           >
             <option value="all">All Years</option>
             <option value="2024">2024</option>
@@ -95,7 +124,7 @@ const Projects = () => {
             onChange={(e) =>
               setFilters({ ...filters, location: e.target.value })
             }
-            className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-500"
+            className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
           >
             <option value="all">All Locations</option>
             <option value="Dubai">Dubai</option>
@@ -104,11 +133,11 @@ const Projects = () => {
           </select>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 projects-grid">
           {filtered.map((project) => (
             <div
               key={project.id}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
+              className="project-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
             >
               <img
                 src={project.image}
@@ -117,7 +146,7 @@ const Projects = () => {
               />
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="px-3 py-1 bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400 rounded-full text-sm">
+                  <span className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full text-sm">
                     {project.sector}
                   </span>
                   <span className="text-gray-500 dark:text-gray-400 text-sm">{project.year}</span>
@@ -130,7 +159,7 @@ const Projects = () => {
                   {project.carpetUsed}
                 </p>
                 <p className="text-slate-700 dark:text-slate-300 mb-4">{project.description}</p>
-                <button className="w-full py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors">
+                <button className="w-full py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors">
                   View Details
                 </button>
               </div>

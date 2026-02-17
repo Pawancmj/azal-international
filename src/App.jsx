@@ -15,29 +15,35 @@ import ProductDetails from "./components/pages/ProductDetails";
 
 import FloatingEtsy from "./components/ui/FloatingEtsy";
 
+import SmoothScroll from "./components/ui/SmoothScroll";
+import CustomCursor from "./components/ui/CustomCursor";
+
 function App() {
   return (
     <GlobalStateProvider>
-      <Router>
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500">
-          <Navbar />
-          <main className="grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/collections" element={<Collections />} />
-              <Route path="/collections/:id" element={<ProductDetails />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/sectors" element={<Sectors />} />
-              <Route path="/sectors/:sectorName" element={<SectorDetail />} />
-              <Route path="/customization" element={<Customization />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
-          </main>
-          <Footer />
-          <FloatingEtsy />
-        </div>
-      </Router>
+      <SmoothScroll>
+        <Router>
+          <CustomCursor />
+          <div className="flex flex-col min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500">
+            <Navbar />
+            <main className="grow">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/collections" element={<Collections />} />
+                <Route path="/collections/:id" element={<ProductDetails />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/sectors" element={<Sectors />} />
+                <Route path="/sectors/:sectorName" element={<SectorDetail />} />
+                <Route path="/customization" element={<Customization />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </main>
+            <Footer />
+            <FloatingEtsy />
+          </div>
+        </Router>
+      </SmoothScroll>
     </GlobalStateProvider>
   );
 }

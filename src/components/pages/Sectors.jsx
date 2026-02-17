@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import React, { useRef } from "react";
 import SEO from "../ui/SEO";
-import ScrollReveal from "../ui/ScrollReveal";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Sectors = () => {
+  const containerRef = useRef(null);
   const sectors = [
     {
       name: "Hospitality",
@@ -61,101 +67,119 @@ const Sectors = () => {
     },
   ];
 
+  useGSAP(() => {
+    // Header Animation
+    gsap.fromTo(".sectors-header",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    // Cards Animation
+    gsap.fromTo(".sector-card",
+      { y: 50, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 0.6, stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".sectors-grid",
+          start: "top 85%",
+        }
+      }
+    );
+
+  }, { scope: containerRef });
+
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors pt-20">
+    <div ref={containerRef} className="min-h-screen bg-white dark:bg-slate-950 transition-colors pt-20">
       <SEO
         title="Industries We Serve"
         description="Explore the diverse sectors Azal International serves with specialized carpet solutions. From Hospitality and Residential to Commercial, Exhibition, and Retail."
         keywords="hotel carpets, office flooring, residential rugs, exhibition carpets, retail flooring solutions"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 animate-reveal">
-              Industries We Serve
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Specialized carpet solutions tailored for diverse sectors and
-              industries
-            </p>
-          </div>
-        </ScrollReveal>
+        <div className="text-center mb-16 sectors-header">
+          <h1 className="text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 animate-reveal">
+            Industries We Serve
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            Specialized carpet solutions tailored for diverse sectors and
+            industries
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sectors.map((sector, idx) => (
-            <ScrollReveal key={sector.slug} animation="scroll-reveal" className={`transition-delay-${idx * 200}`}>
-              <Link
-                to={`/sectors/${sector.slug}`}
-                className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group"
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={sector.image}
-                    alt={sector.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-4xl">{sector.icon}</span>
-                      <h3 className="text-2xl font-bold text-white">
-                        {sector.name}
-                      </h3>
-                    </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 sectors-grid">
+          {sectors.map((sector) => (
+            <Link
+              key={sector.slug}
+              to={`/sectors/${sector.slug}`}
+              className="sector-card bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+            >
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={sector.image}
+                  alt={sector.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-4xl">{sector.icon}</span>
+                    <h3 className="text-2xl font-bold text-white">
+                      {sector.name}
+                    </h3>
                   </div>
                 </div>
+              </div>
 
-                <div className="p-6">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">{sector.description}</p>
+              <div className="p-6">
+                <p className="text-gray-700 dark:text-gray-300 mb-4">{sector.description}</p>
 
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-900 dark:text-slate-100 text-sm">
-                      Key Features:
-                    </h4>
-                    <ul className="space-y-1">
-                      {sector.features.map((feature, index) => (
-                        <li
-                          key={index}
-                          className="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-gray-900 dark:text-slate-100 text-sm">
+                    Key Features:
+                  </h4>
+                  <ul className="space-y-1">
+                    {sector.features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                      >
+                        <svg
+                          className="w-4 h-4 text-amber-600 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
                         >
-                          <svg
-                            className="w-4 h-4 text-gold-600 mr-2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-6 flex items-center text-gold-600 dark:text-gold-400 font-semibold group-hover:text-gold-700 dark:group-hover:text-gold-300">
-                    Learn More
-                    <svg
-                      className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </div>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </Link>
-            </ScrollReveal>
+
+                <div className="mt-6 flex items-center text-amber-600 dark:text-amber-400 font-semibold group-hover:text-amber-700 dark:group-hover:text-amber-300">
+                  Learn More
+                  <svg
+                    className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

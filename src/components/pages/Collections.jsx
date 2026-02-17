@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import QuickViewModal from "../ui/QuickViewModal";
 import SEO from "../ui/SEO";
-import ScrollReveal from "../ui/ScrollReveal";
 import { useGlobalState } from "../context/GlobalStateContext";
 import { products as allProducts } from "../../data/products";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Collections = () => {
   const { searchQuery, setSearchQuery, filters, updateFilters, clearFilters } =
@@ -13,6 +17,42 @@ const Collections = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showQuickView, setShowQuickView] = useState(false);
   const navigate = useNavigate();
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.fromTo(".collections-header",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    )
+      .fromTo(".search-bar",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+        "-=0.4"
+      );
+
+    gsap.fromTo(".filter-panel",
+      { x: -30, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.5 }
+    );
+
+    // Animate product cards whenever filteredProducts changes (this might need a key or useEffect dependency on the list in a real app, 
+    // but GSAP might just run once on mount here. For dynamic lists, simpler CSS transitions or key-based GSAP execution is often better. 
+    // Here we'll animate the initial load of the grid container).
+
+    gsap.fromTo(".product-card",
+      { y: 50, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 0.6, stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".product-grid",
+          start: "top 80%",
+        }
+      }
+    );
+
+  }, { scope: containerRef });
 
   // Filter logic
   const filteredProducts = allProducts.filter((product) => {
@@ -100,50 +140,46 @@ const Collections = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
+    <div ref={containerRef} className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
       <SEO
         title="Collections"
         description="Explore Azal International's diverse collection of premium carpets. From Royal Persian Heritage to Modern Geometric and Vintage Oriental rugs."
         keywords="carpet collections, persian rugs, modern carpets, luxury rugs, online carpet shop"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <ScrollReveal>
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Our Collections
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Discover our premium carpet collections crafted with excellence
-            </p>
-          </div>
-        </ScrollReveal>
+        <div className="mb-8 collections-header">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Our Collections
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Discover our premium carpet collections crafted with excellence
+          </p>
+        </div>
 
-        <ScrollReveal animation="scroll-reveal-up" threshold={0.01}>
-          <div className="mb-6">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search by name, material, or tags..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 pl-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-500"
+        <div className="mb-6 search-bar">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search by name, material, or tags..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-6 py-4 pl-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+            <svg
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
-              <svg
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
+            </svg>
           </div>
-        </ScrollReveal>
+        </div>
 
         <div className="flex flex-col lg:flex-row gap-3 lg:gap-8">
           {/* Mobile Filter Toggle */}
@@ -158,14 +194,14 @@ const Collections = () => {
           </button>
 
           {/* Filter Panel */}
-          <div className={`lg:w-64 shrink-0 transition-all duration-300 ${showFilters ? "block" : "hidden lg:block"
+          <div className={`lg:w-64 shrink-0 transition-all duration-300 filter-panel ${showFilters ? "block" : "hidden lg:block"
             }`}>
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 md:p-6 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Filters</h2>
                 <button
                   onClick={() => clearFilters("collections")}
-                  className="text-sm text-gold-600 hover:text-gold-700 font-medium"
+                  className="text-sm text-amber-600 hover:text-amber-700 font-medium"
                 >
                   Clear All
                 </button>
@@ -182,10 +218,10 @@ const Collections = () => {
                           type="checkbox"
                           checked={filters.collections.material.includes(material)}
                           onChange={(e) => handleFilterChange("material", material, e.target.checked)}
-                          className="peer h-4 w-4 text-gold-600 border-slate-300 dark:border-slate-600 rounded focus:ring-gold-500"
+                          className="peer h-4 w-4 text-amber-600 border-slate-300 dark:border-slate-600 rounded focus:ring-amber-500"
                         />
                       </div>
-                      <span className="ml-2 text-slate-700 dark:text-slate-400 group-hover:text-gold-600 transition-colors">{material}</span>
+                      <span className="ml-2 text-slate-700 dark:text-slate-400 group-hover:text-amber-600 transition-colors">{material}</span>
                     </label>
                   ))}
                 </div>
@@ -201,9 +237,9 @@ const Collections = () => {
                         type="checkbox"
                         checked={filters.collections.size.includes(size)}
                         onChange={(e) => handleFilterChange("size", size, e.target.checked)}
-                        className="h-4 w-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        className="h-4 w-4 text-amber-600 border-gray-300 dark:border-gray-600 rounded focus:ring-amber-500"
                       />
-                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-gold-600 transition-colors">{size} ft</span>
+                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-amber-600 transition-colors">{size} ft</span>
                     </label>
                   ))}
                 </div>
@@ -219,9 +255,9 @@ const Collections = () => {
                         type="checkbox"
                         checked={filters.collections.color.includes(color)}
                         onChange={(e) => handleFilterChange("color", color, e.target.checked)}
-                        className="h-4 w-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        className="h-4 w-4 text-amber-600 border-gray-300 dark:border-gray-600 rounded focus:ring-amber-500"
                       />
-                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-gold-600 transition-colors">{color}</span>
+                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-amber-600 transition-colors">{color}</span>
                     </label>
                   ))}
                 </div>
@@ -242,7 +278,7 @@ const Collections = () => {
                       step="1000"
                       value={filters.collections.price.min}
                       onChange={(e) => handlePriceChange("min", e.target.value)}
-                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-gold-600"
+                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-600"
                     />
                   </div>
                   <div>
@@ -256,7 +292,7 @@ const Collections = () => {
                       step="1000"
                       value={filters.collections.price.max}
                       onChange={(e) => handlePriceChange("max", e.target.value)}
-                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-gold-600"
+                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-600"
                     />
                   </div>
                 </div>
@@ -272,9 +308,9 @@ const Collections = () => {
                         type="checkbox"
                         checked={filters.collections.style.includes(style)}
                         onChange={(e) => handleFilterChange("style", style, e.target.checked)}
-                        className="h-4 w-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        className="h-4 w-4 text-amber-600 border-gray-300 dark:border-gray-600 rounded focus:ring-amber-500"
                       />
-                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-gold-600 transition-colors">{style}</span>
+                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-amber-600 transition-colors">{style}</span>
                     </label>
                   ))}
                 </div>
@@ -283,7 +319,7 @@ const Collections = () => {
           </div>
 
           {/* Product Grid */}
-          <div className="flex-1">
+          <div className="flex-1 product-grid">
             <div className="mb-4 flex items-center justify-between">
               <p className="text-xs md:text-base text-gray-600 dark:text-gray-400">
                 Showing {filteredProducts.length} results
@@ -313,9 +349,9 @@ const Collections = () => {
                 {filteredProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full"
+                    className="product-card bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full group"
                   >
-                    <div className="relative h-40 md:h-64 overflow-hidden group shrink-0">
+                    <div className="relative h-40 md:h-64 overflow-hidden shrink-0">
                       <img
                         src={product.image}
                         alt={product.name}
@@ -330,7 +366,7 @@ const Collections = () => {
                         </button>
                         <button
                           onClick={() => handleViewDetails(product.id)}
-                          className="px-6 py-2 bg-gold-600 text-white rounded-lg font-semibold hover:bg-gold-700 transition-colors"
+                          className="px-6 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors"
                         >
                           View Details
                         </button>
@@ -355,7 +391,7 @@ const Collections = () => {
                             e.stopPropagation();
                             handleViewDetails(product.id);
                           }}
-                          className="p-2 bg-gold-600 text-white rounded-full shadow-lg"
+                          className="p-2 bg-amber-600 text-white rounded-full shadow-lg"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -371,12 +407,12 @@ const Collections = () => {
                         {product.material} • {product.size} ft
                       </p>
                       <div className="mt-auto flex items-center justify-between">
-                        <span className="text-sm md:text-2xl font-bold text-gold-600 dark:text-gold-400">
+                        <span className="text-sm md:text-2xl font-bold text-amber-600 dark:text-amber-400">
                           ₹{product.price.toLocaleString()}
                         </span>
                         <button
                           onClick={() => handleViewDetails(product.id)}
-                          className="hidden md:block px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors text-sm"
+                          className="hidden md:block px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm"
                         >
                           View Details
                         </button>
