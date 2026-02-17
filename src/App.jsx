@@ -11,6 +11,7 @@ import Sectors from "./components/pages/Sectors";
 import SectorDetail from "./components/pages/SectorDetail";
 import Customization from "./components/pages/Customization";
 import Contact from "./components/pages/Contact";
+import ProductDetails from "./components/pages/ProductDetails";
 
 import FloatingEtsy from "./components/ui/FloatingEtsy";
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/collections" element={<Collections />} />
+              <Route path="/collections/:id" element={<ProductDetails />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/sectors" element={<Sectors />} />
               <Route path="/sectors/:sectorName" element={<SectorDetail />} />

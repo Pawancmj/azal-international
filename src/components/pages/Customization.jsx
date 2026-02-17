@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import SEO from "../ui/SEO";
 import ScrollReveal from "../ui/ScrollReveal";
 
+import custImg1 from "../../assets/customization-images/1.png";
+import custImg2 from "../../assets/customization-images/2.png";
+import custImg3 from "../../assets/customization-images/3.png";
+import custImg4 from "../../assets/customization-images/4.png";
+
 const Customization = () => {
     const rugTechniques = [
         "HAND KNOTTED",
@@ -80,8 +85,8 @@ const Customization = () => {
                 {/* Imagination Section */}
                 <ScrollReveal animation="scroll-reveal-up">
                     <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
-                        <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl h-96 flex items-center justify-center border-2 border-dashed border-gold-500/30">
-                            <span className="text-slate-400">Image: Imagination to Reality</span>
+                        <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl h-96 flex items-center justify-center overflow-hidden shadow-xl">
+                            <img src={custImg1} alt="Imagination to Reality" className="w-full h-full object-cover" />
                         </div>
                         <div>
                             <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4 font-playfair uppercase tracking-wider">
@@ -138,8 +143,8 @@ const Customization = () => {
                                 </div>
                             </div>
                             <div className="lg:w-1/2">
-                                <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl h-full min-h-[300px] flex items-center justify-center border-2 border-dashed border-gold-500/30">
-                                    <span className="text-slate-400">Image: Hand-Tufted Craftsmanship</span>
+                                <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl h-full min-h-[300px] flex items-center justify-center overflow-hidden shadow-xl">
+                                    <img src={custImg2} alt="Hand-Tufted Craftsmanship" className="w-full h-full object-cover" />
                                 </div>
                             </div>
                         </div>
@@ -151,8 +156,8 @@ const Customization = () => {
                     <section className="py-16 border-t border-slate-100 dark:border-slate-800">
                         <div className="flex flex-col-reverse lg:flex-row gap-12 items-center">
                             <div className="lg:w-1/2">
-                                <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl w-full h-96 flex items-center justify-center border-2 border-dashed border-gold-500/30">
-                                    <span className="text-slate-400">Image: Custom Leather Carpet</span>
+                                <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl w-full h-96 flex items-center justify-center overflow-hidden shadow-xl">
+                                    <img src={custImg3} alt="Custom Leather Carpet" className="w-full h-full object-cover" />
                                 </div>
                             </div>
                             <div className="lg:w-1/2">
@@ -206,8 +211,8 @@ const Customization = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl h-80 flex items-center justify-center border-2 border-dashed border-gold-500/30">
-                                <span className="text-slate-400">Image: Organic Jute Texture</span>
+                            <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl h-80 flex items-center justify-center overflow-hidden shadow-xl">
+                                <img src={custImg4} alt="Organic Jute Texture" className="w-full h-full object-cover" />
                             </div>
                         </div>
                     </section>

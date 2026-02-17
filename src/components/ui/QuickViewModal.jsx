@@ -1,11 +1,18 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const QuickViewModal = ({ product, onClose }) => {
+  const navigate = useNavigate();
+
   const handleWhatsApp = () => {
     const message = `Hello, I am interested in this product: ${product.name}. Please provide more details.`;
     const url = `https://wa.me/7705879297?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
+  };
+
+  const handleViewFullDetails = () => {
+    navigate(`/collections/${product.id}`);
+    onClose(); // Close modal after navigation
   };
 
   return (
@@ -54,51 +61,42 @@ const QuickViewModal = ({ product, onClose }) => {
 
             {/* Details */}
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 {product.name}
               </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-1">{product.style}</p>
+              <h4 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{product.name}</h4>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6 italic">
+                {product.description}
+              </p>
+
+              <div className="space-y-2 mb-6 text-sm text-gray-700 dark:text-gray-300">
+                <div className="grid grid-cols-2">
+                  <span className="font-semibold">Material:</span>
+                  <span>{product.material}</span>
+                </div>
+                <div className="grid grid-cols-2">
+                  <span className="font-semibold">Size:</span>
+                  <span>{product.size} ft</span>
+                </div>
+                <div className="grid grid-cols-2">
+                  <span className="font-semibold">Color:</span>
+                  <span>{product.color}</span>
+                </div>
+                <div className="grid grid-cols-2">
+                  <span className="font-semibold">Style:</span>
+                  <span>{product.style}</span>
+                </div>
+              </div>
 
               <div className="mb-6">
                 <span className="text-4xl font-bold text-gold-600 dark:text-gold-400">
-                  ${product.price.toLocaleString()}
+                  ₹{product.price.toLocaleString()}
                 </span>
               </div>
 
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300 w-24">
-                    Category:
-                  </span>
-                  <span className="text-gray-600 dark:text-gray-400">{product.category}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300 w-24">
-                    Material:
-                  </span>
-                  <span className="text-gray-600 dark:text-gray-400">{product.material}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300 w-24">
-                    Size:
-                  </span>
-                  <span className="text-gray-600 dark:text-gray-400">{product.size} ft</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300 w-24">
-                    Color:
-                  </span>
-                  <span className="text-gray-600 dark:text-gray-400">{product.color}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300 w-24">
-                    Style:
-                  </span>
-                  <span className="text-gray-600 dark:text-gray-400">{product.style}</span>
-                </div>
-              </div>
-
               <div className="mb-6">
-                <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">Tags</h4>
                 <div className="flex flex-wrap gap-2">
                   {product.tags.map((tag, index) => (
                     <span
@@ -112,6 +110,12 @@ const QuickViewModal = ({ product, onClose }) => {
               </div>
 
               <div className="space-y-3">
+                <button
+                  onClick={handleViewFullDetails}
+                  className="w-full py-3 bg-gold-600 text-white rounded-lg font-semibold hover:bg-gold-700 transition-colors"
+                >
+                  View Full Details
+                </button>
                 <button
                   onClick={handleWhatsApp}
                   className="w-full py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2"

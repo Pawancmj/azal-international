@@ -20,7 +20,7 @@ export const GlobalStateProvider = ({ children }) => {
       material: [],
       size: [],
       color: [],
-      price: { min: 0, max: 10000 },
+      price: { min: 0, max: 50000 },
       style: [],
     },
     projects: {
@@ -69,7 +69,7 @@ export const GlobalStateProvider = ({ children }) => {
             material: [],
             size: [],
             color: [],
-            price: { min: 0, max: 10000 },
+            price: { min: 0, max: 50000 },
             style: [],
           }
           : {

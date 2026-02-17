@@ -3,6 +3,8 @@ import QuickViewModal from "../ui/QuickViewModal";
 import SEO from "../ui/SEO";
 import ScrollReveal from "../ui/ScrollReveal";
 import { useGlobalState } from "../context/GlobalStateContext";
+import { products as allProducts } from "../../data/products";
+import { useNavigate } from "react-router-dom";
 
 const Collections = () => {
   const { searchQuery, setSearchQuery, filters, updateFilters, clearFilters } =
@@ -10,88 +12,7 @@ const Collections = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showQuickView, setShowQuickView] = useState(false);
-
-  // Sample products data - replace with API call
-  const allProducts = [
-    {
-      id: 1,
-      name: "Royal Persian Heritage",
-      category: "Persian",
-      material: "Wool",
-      size: "8x10",
-      color: "Red",
-      price: 2500,
-      style: "Traditional",
-      image:
-        "https://images.unsplash.com/photo-1600166898405-da9535204843?w=400",
-      tags: ["luxury", "handmade", "persian"],
-    },
-    {
-      id: 2,
-      name: "Modern Geometric",
-      category: "Contemporary",
-      material: "Synthetic",
-      size: "6x9",
-      color: "Gray",
-      price: 1200,
-      style: "Modern",
-      image:
-        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400",
-      tags: ["modern", "geometric", "gray"],
-    },
-    {
-      id: 3,
-      name: "Vintage Oriental",
-      category: "Oriental",
-      material: "Silk",
-      size: "9x12",
-      color: "Blue",
-      price: 3800,
-      style: "Vintage",
-      image:
-        "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=400",
-      tags: ["vintage", "silk", "oriental"],
-    },
-    {
-      id: 4,
-      name: "Minimalist Beige",
-      category: "Contemporary",
-      material: "Cotton",
-      size: "5x7",
-      color: "Beige",
-      price: 800,
-      style: "Minimalist",
-      image:
-        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400",
-      tags: ["minimalist", "neutral", "cotton"],
-    },
-    {
-      id: 5,
-      name: "Luxury Medallion",
-      category: "Persian",
-      material: "Wool",
-      size: "10x14",
-      color: "Navy",
-      price: 4500,
-      style: "Traditional",
-      image:
-        "https://images.unsplash.com/photo-1600166898405-da9535204843?w=400",
-      tags: ["luxury", "traditional", "wool"],
-    },
-    {
-      id: 6,
-      name: "Abstract Art",
-      category: "Contemporary",
-      material: "Synthetic",
-      size: "8x10",
-      color: "Multi",
-      price: 1500,
-      style: "Abstract",
-      image:
-        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400",
-      tags: ["abstract", "colorful", "modern"],
-    },
-  ];
+  const navigate = useNavigate();
 
   // Filter logic
   const filteredProducts = allProducts.filter((product) => {
@@ -174,6 +95,10 @@ const Collections = () => {
     setShowQuickView(true);
   };
 
+  const handleViewDetails = (productId) => {
+    navigate(`/collections/${productId}`);
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-20">
       <SEO
@@ -220,120 +145,118 @@ const Collections = () => {
           </div>
         </ScrollReveal>
 
-        <div className="flex flex-row gap-3 lg:gap-8">
+        <div className="flex flex-col lg:flex-row gap-3 lg:gap-8">
+          {/* Mobile Filter Toggle */}
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className="lg:hidden w-full py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center justify-center gap-2 text-slate-700 dark:text-slate-300 font-semibold mb-4"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            {showFilters ? "Hide Filters" : "Show Filters"}
+          </button>
+
           {/* Filter Panel */}
-          <div className="w-32 md:w-48 lg:w-64 shrink-0 transition-all duration-300">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 md:p-6 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 md:mb-6">
-                <h2 className="text-sm md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 md:mb-0">Filters</h2>
+          <div className={`lg:w-64 shrink-0 transition-all duration-300 ${showFilters ? "block" : "hidden lg:block"
+            }`}>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 md:p-6 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Filters</h2>
                 <button
                   onClick={() => clearFilters("collections")}
-                  className="text-xs md:text-sm text-gold-600 hover:text-gold-700 text-left md:text-right"
+                  className="text-sm text-gold-600 hover:text-gold-700 font-medium"
                 >
                   Clear All
                 </button>
               </div>
 
               {/* Material Filter */}
-              <div className="mb-4 md:mb-6">
-                <h3 className="text-xs md:text-base font-semibold text-gray-900 dark:text-gray-100 mb-2 md:mb-3">Material</h3>
-                <div className="space-y-1 md:space-y-2">
+              <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Material</h3>
+                <div className="space-y-2">
                   {["Wool", "Silk", "Cotton", "Synthetic"].map((material) => (
-                    <label key={material} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={filters.collections.material.includes(
-                          material,
-                        )}
-                        onChange={(e) =>
-                          handleFilterChange(
-                            "material",
-                            material,
-                            e.target.checked,
-                          )
-                        }
-                        className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-slate-300 dark:border-slate-600 rounded focus:ring-gold-500"
-                      />
-                      <span className="ml-2 text-xs md:text-base text-slate-700 dark:text-slate-400">{material}</span>
+                    <label key={material} className="flex items-center cursor-pointer group">
+                      <div className="relative flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={filters.collections.material.includes(material)}
+                          onChange={(e) => handleFilterChange("material", material, e.target.checked)}
+                          className="peer h-4 w-4 text-gold-600 border-slate-300 dark:border-slate-600 rounded focus:ring-gold-500"
+                        />
+                      </div>
+                      <span className="ml-2 text-slate-700 dark:text-slate-400 group-hover:text-gold-600 transition-colors">{material}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               {/* Size Filter */}
-              <div className="mb-4 md:mb-6">
-                <h3 className="text-xs md:text-base font-semibold text-gray-900 dark:text-gray-100 mb-2 md:mb-3">Size</h3>
-                <div className="space-y-1 md:space-y-2">
+              <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Size</h3>
+                <div className="space-y-2">
                   {["5x7", "6x9", "8x10", "9x12", "10x14"].map((size) => (
-                    <label key={size} className="flex items-center">
+                    <label key={size} className="flex items-center cursor-pointer group">
                       <input
                         type="checkbox"
                         checked={filters.collections.size.includes(size)}
-                        onChange={(e) =>
-                          handleFilterChange("size", size, e.target.checked)
-                        }
-                        className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        onChange={(e) => handleFilterChange("size", size, e.target.checked)}
+                        className="h-4 w-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
                       />
-                      <span className="ml-2 text-xs md:text-base text-gray-700 dark:text-gray-400">{size} ft</span>
+                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-gold-600 transition-colors">{size} ft</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               {/* Color Filter */}
-              <div className="mb-4 md:mb-6">
-                <h3 className="text-xs md:text-base font-semibold text-gray-900 dark:text-gray-100 mb-2 md:mb-3">Color</h3>
-                <div className="space-y-1 md:space-y-2">
-                  {["Red", "Blue", "Gray", "Beige", "Navy", "Multi"].map(
-                    (color) => (
-                      <label key={color} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={filters.collections.color.includes(color)}
-                          onChange={(e) =>
-                            handleFilterChange("color", color, e.target.checked)
-                          }
-                          className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
-                        />
-                        <span className="ml-2 text-xs md:text-base text-gray-700 dark:text-gray-400">{color}</span>
-                      </label>
-                    ),
-                  )}
+              <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Color</h3>
+                <div className="space-y-2">
+                  {["Red", "Blue", "Gray", "Beige", "Navy", "Multi"].map((color) => (
+                    <label key={color} className="flex items-center cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={filters.collections.color.includes(color)}
+                        onChange={(e) => handleFilterChange("color", color, e.target.checked)}
+                        className="h-4 w-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                      />
+                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-gold-600 transition-colors">{color}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
 
               {/* Price Filter */}
-              <div className="mb-4 md:mb-6">
-                <h3 className="text-xs md:text-base font-semibold text-gray-900 dark:text-gray-100 mb-2 md:mb-3">
-                  Price Range
-                </h3>
-                <div className="space-y-2 md:space-y-4">
+              <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Price Range</h3>
+                <div className="space-y-4">
                   <div>
-                    <label className="text-xs text-gray-600 block">
-                      Min: ${filters.collections.price.min}
+                    <label className="text-sm text-gray-600 dark:text-gray-400 block mb-1">
+                      Min: ₹{filters.collections.price.min.toLocaleString()}
                     </label>
                     <input
                       type="range"
                       min="0"
-                      max="10000"
-                      step="100"
+                      max="50000"
+                      step="1000"
                       value={filters.collections.price.min}
                       onChange={(e) => handlePriceChange("min", e.target.value)}
-                      className="w-full h-1 md:h-2"
+                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-gold-600"
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-600 block">
-                      Max: ${filters.collections.price.max}
+                    <label className="text-sm text-gray-600 dark:text-gray-400 block mb-1">
+                      Max: ₹{filters.collections.price.max.toLocaleString()}
                     </label>
                     <input
                       type="range"
                       min="0"
-                      max="10000"
-                      step="100"
+                      max="50000"
+                      step="1000"
                       value={filters.collections.price.max}
                       onChange={(e) => handlePriceChange("max", e.target.value)}
-                      className="w-full h-1 md:h-2"
+                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-gold-600"
                     />
                   </div>
                 </div>
@@ -341,25 +264,17 @@ const Collections = () => {
 
               {/* Style Filter */}
               <div className="mb-4">
-                <h3 className="text-xs md:text-base font-semibold text-gray-900 dark:text-gray-100 mb-2 md:mb-3">Style</h3>
-                <div className="space-y-1 md:space-y-2">
-                  {[
-                    "Traditional",
-                    "Modern",
-                    "Vintage",
-                    "Minimalist",
-                    "Abstract",
-                  ].map((style) => (
-                    <label key={style} className="flex items-center">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Style</h3>
+                <div className="space-y-2">
+                  {["Traditional", "Modern", "Vintage", "Minimalist", "Abstract"].map((style) => (
+                    <label key={style} className="flex items-center cursor-pointer group">
                       <input
                         type="checkbox"
                         checked={filters.collections.style.includes(style)}
-                        onChange={(e) =>
-                          handleFilterChange("style", style, e.target.checked)
-                        }
-                        className="w-3 h-3 md:w-4 md:h-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
+                        onChange={(e) => handleFilterChange("style", style, e.target.checked)}
+                        className="h-4 w-4 text-gold-600 border-gray-300 dark:border-gray-600 rounded focus:ring-gold-500"
                       />
-                      <span className="ml-2 text-xs md:text-base text-gray-700 dark:text-gray-400">{style}</span>
+                      <span className="ml-2 text-gray-700 dark:text-gray-400 group-hover:text-gold-600 transition-colors">{style}</span>
                     </label>
                   ))}
                 </div>
@@ -406,41 +321,63 @@ const Collections = () => {
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <button
-                        onClick={() => handleQuickView(product)}
-                        className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex"
-                      >
-                        <span className="px-6 py-3 bg-white dark:bg-gray-700 dark:text-white text-gray-900 rounded-lg font-semibold">
+                      <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex gap-4">
+                        <button
+                          onClick={() => handleQuickView(product)}
+                          className="px-6 py-2 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                        >
                           Quick View
-                        </span>
-                      </button>
+                        </button>
+                        <button
+                          onClick={() => handleViewDetails(product.id)}
+                          className="px-6 py-2 bg-gold-600 text-white rounded-lg font-semibold hover:bg-gold-700 transition-colors"
+                        >
+                          View Details
+                        </button>
+                      </div>
 
-                      {/* Mobile Quick View Button */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleQuickView(product);
-                        }}
-                        className="md:hidden absolute bottom-2 right-2 p-2 bg-white dark:bg-gray-700 dark:text-white rounded-full shadow-lg"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                      </button>
+                      {/* Mobile Buttons */}
+                      <div className="md:hidden absolute bottom-2 right-2 flex gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleQuickView(product);
+                          }}
+                          className="p-2 bg-white dark:bg-gray-700 dark:text-white rounded-full shadow-lg"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleViewDetails(product.id);
+                          }}
+                          className="p-2 bg-gold-600 text-white rounded-full shadow-lg"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                     <div className="p-3 md:p-6 flex flex-col flex-1">
                       <h3 className="text-sm md:text-lg font-bold text-gray-900 dark:text-gray-100 mb-1 md:mb-2 line-clamp-2">
                         {product.name}
                       </h3>
                       <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-2 md:mb-4">
-                        {product.material} • {product.size}
+                        {product.material} • {product.size} ft
                       </p>
                       <div className="mt-auto flex items-center justify-between">
                         <span className="text-sm md:text-2xl font-bold text-gold-600 dark:text-gold-400">
-                          ${product.price.toLocaleString()}
+                          ₹{product.price.toLocaleString()}
                         </span>
-                        <button className="hidden md:block px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors text-sm">
+                        <button
+                          onClick={() => handleViewDetails(product.id)}
+                          className="hidden md:block px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors text-sm"
+                        >
                           View Details
                         </button>
                       </div>
@@ -465,3 +402,4 @@ const Collections = () => {
 };
 
 export default Collections;
+
