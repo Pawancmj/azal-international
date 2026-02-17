@@ -158,9 +158,12 @@ const Home = () => {
       <section className="relative h-screen flex items-center justify-center bg-slate-900 text-white overflow-hidden hero-section">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="http://diningandlivingroom.com/wp-content/uploads/2017/06/8-Dining-Room-Tables-Perfect-for-a-Luxury-Set4.jpg?w=1920"
-            alt="Luxury carpet background"
+            src="http://diningandlivingroom.com/wp-content/uploads/2017/06/8-Dining-Room-Tables-Perfect-for-a-Luxury-Set4.jpg?w=1920&q=80&auto=format"
+            alt="Luxury dining room with premium carpet flooring"
             className="w-full h-full object-cover"
+            width="1920"
+            height="1080"
+            fetchpriority="high"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -193,7 +196,7 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce" aria-hidden="true">
           <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
@@ -222,6 +225,7 @@ const Home = () => {
               <Link
                 to="/about"
                 className="inline-flex items-center px-6 py-3 border-b-2 border-amber-600 text-amber-600 hover:text-amber-700 font-semibold transition-all group"
+                aria-label="Learn more about Azal International"
               >
                 Learn More About Us
                 <svg
@@ -229,6 +233,7 @@ const Home = () => {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -242,16 +247,22 @@ const Home = () => {
             <div className="grid grid-cols-2 gap-4 relative about-image">
               <div className="space-y-4 pt-12">
                 <img
-                  src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=500&q=80"
-                  alt="Carpet detail"
+                  src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=500&q=80&auto=format"
+                  alt="Detailed texture of a premium carpet"
                   className="rounded-2xl shadow-xl w-full h-64 object-cover hover:scale-[1.02] transition-transform duration-500"
+                  width="500"
+                  height="400"
+                  loading="lazy"
                 />
               </div>
               <div className="space-y-4">
                 <img
-                  src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80"
-                  alt="Manufacturing"
+                  src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80&auto=format"
+                  alt="Carpet manufacturing process"
                   className="rounded-2xl shadow-xl w-full h-64 object-cover hover:scale-[1.02] transition-transform duration-500"
+                  width="500"
+                  height="400"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -279,14 +290,18 @@ const Home = () => {
               >
                 <div className="relative h-72 overflow-hidden shrink-0">
                   <img
-                    src={collection.image}
+                    src={`${collection.image}?w=600&q=80&auto=format`}
                     alt={collection.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    width="600"
+                    height="400"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
                     <button
                       onClick={() => handleQuickView(collection)}
                       className="px-6 py-2 bg-white text-gray-900 rounded-full font-semibold hover:bg-amber-50 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
+                      aria-label={`Quick view of ${collection.name}`}
                     >
                       Quick View
                     </button>
@@ -301,7 +316,7 @@ const Home = () => {
                   </p>
                   <div className="flex items-center text-amber-600 font-medium">
                     <span>View Details</span>
-                    <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </div>
                 </div>
               </div>
@@ -335,9 +350,12 @@ const Home = () => {
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
-                    src={project.image}
-                    alt={project.name}
+                    src={`${project.image}&w=600&q=80&auto=format`}
+                    alt={`${project.name} - ${project.sector} Project`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    width="600"
+                    height="400"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 right-4 px-4 py-1.5 bg-amber-600 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
                     {project.sector}
@@ -346,7 +364,7 @@ const Home = () => {
                 </div>
                 <div className="p-8 relative">
                   <div className="absolute -top-10 right-8 w-16 h-16 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                    <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2 truncate pr-16">
                     {project.name}
@@ -357,6 +375,7 @@ const Home = () => {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -402,8 +421,9 @@ const Home = () => {
                 key={sector.name}
                 to={sector.path}
                 className="sector-card bg-white dark:bg-slate-800/50 backdrop-blur-sm border border-slate-100 dark:border-slate-700 rounded-2xl p-8 text-center transition-all hover:-translate-y-2 hover:shadow-xl hover:border-amber-500/30 group"
+                aria-label={`View ${sector.name} sector solutions`}
               >
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm">{sector.icon}</div>
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" aria-hidden="true">{sector.icon}</div>
                 <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-amber-600 transition-colors">{sector.name}</h3>
               </Link>
             ))}
@@ -414,7 +434,15 @@ const Home = () => {
       {/* Customization Preview Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-blue-900">
-          <img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+          <img
+            src="https://images.unsplash.com/photo-1558603668-6570496b66f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80&auto=format"
+            className="w-full h-full object-cover opacity-20 mix-blend-overlay"
+            width="1500"
+            height="800"
+            loading="lazy"
+            alt=""
+            aria-hidden="true"
+          />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -433,7 +461,7 @@ const Home = () => {
                 ].map((item, i) => (
                   <div key={i} className="flex items-start">
                     <div className="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4">
-                      <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
@@ -450,14 +478,21 @@ const Home = () => {
             </div>
             <div className="relative">
               <div className="absolute inset-0 bg-amber-500 blur-[100px] opacity-20 rounded-full"></div>
-              <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=800" alt="Customization" className="relative rounded-2xl shadow-2xl border-4 border-white/10 rotate-3 hover:rotate-0 transition-transform duration-700" />
+              <img
+                src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=800&q=80&auto=format"
+                alt="Customized carpet sample"
+                className="relative rounded-2xl shadow-2xl border-4 border-white/10 rotate-3 hover:rotate-0 transition-transform duration-700"
+                width="800"
+                height="600"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Exhibition Section */}
-      <section className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors exhibitions-section">
+      <section className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors exhibitions-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -494,7 +529,7 @@ const Home = () => {
                 key={index}
                 className="exhibition-card group bg-white dark:bg-slate-900 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 dark:border-slate-800 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 p-4 opacity-10 text-9xl leading-none select-none group-hover:scale-150 transition-transform duration-700">
+                <div className="absolute top-0 right-0 p-4 opacity-10 text-9xl leading-none select-none group-hover:scale-150 transition-transform duration-700" aria-hidden="true">
                   {exhibition.icon}
                 </div>
 
@@ -504,8 +539,8 @@ const Home = () => {
                   </span>
                   <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{exhibition.name}</h3>
                   <div className="flex flex-col space-y-2 text-slate-600 dark:text-slate-400">
-                    <span className="flex items-center"><svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>{exhibition.date}</span>
-                    <span className="flex items-center"><svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>{exhibition.location}</span>
+                    <span className="flex items-center"><svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>{exhibition.date}</span>
+                    <span className="flex items-center"><svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>{exhibition.location}</span>
                   </div>
                 </div>
               </div>
