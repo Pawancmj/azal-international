@@ -490,65 +490,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* Exhibition Section */}
-      <section className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors exhibitions-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Upcoming Exhibitions
-            </h2>
-            <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-6"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Domotex 2026",
-                date: "Jan 10-13, 2026",
-                location: "Hannover, DE",
-                status: "Upcoming",
-                icon: "🏛️"
-              },
-              {
-                name: "Heimtextil 2026",
-                date: "Jan 14-17, 2026",
-                location: "Frankfurt, DE",
-                status: "Upcoming",
-                icon: "🧵"
-              },
-              {
-                name: "Index Dubai 2026",
-                date: "May 27-30, 2026",
-                location: "Dubai, UAE",
-                status: "Confirmed",
-                icon: "🕌"
-              },
-            ].map((exhibition, index) => (
-              <div
-                key={index}
-                className="exhibition-card group bg-white dark:bg-slate-900 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 dark:border-slate-800 relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 p-4 opacity-10 text-9xl leading-none select-none group-hover:scale-150 transition-transform duration-700" aria-hidden="true">
-                  {exhibition.icon}
-                </div>
-
-                <div className="relative z-10">
-                  <span className="inline-block px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-bold rounded-full mb-4 uppercase tracking-wide">
-                    {exhibition.status}
-                  </span>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{exhibition.name}</h3>
-                  <div className="flex flex-col space-y-2 text-slate-600 dark:text-slate-400">
-                    <span className="flex items-center"><svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>{exhibition.date}</span>
-                    <span className="flex items-center"><svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>{exhibition.location}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Sustainability Section */}
       <section className="py-20 bg-green-50 dark:bg-green-900/10 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

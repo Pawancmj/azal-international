@@ -14,15 +14,16 @@ import Contact from "./components/pages/Contact";
 import ProductDetails from "./components/pages/ProductDetails";
 
 import FloatingEtsy from "./components/ui/FloatingEtsy";
-
 import SmoothScroll from "./components/ui/SmoothScroll";
 import CustomCursor from "./components/ui/CustomCursor";
+import ScrollToTop from "./components/ui/ScrollToTop"; // Add this import
 
 function App() {
   return (
     <GlobalStateProvider>
       <SmoothScroll>
         <Router>
+          <ScrollToTop /> {/* Add this line - right after Router */}
           <CustomCursor />
           <div className="flex flex-col min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500">
             <Navbar />
