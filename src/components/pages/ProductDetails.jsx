@@ -172,11 +172,11 @@ const ProductDetails = () => {
                             {product.description}
                         </p>
 
-                        <div className="flex items-center mb-8">
+                        {/* <div className="flex items-center mb-8">
                             <span className="text-4xl font-bold text-amber-600 dark:text-amber-400">
                                 ₹{product.price.toLocaleString()}
                             </span>
-                        </div>
+                        </div> */}
 
                         {/* Specifications */}
                         <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 mb-8">
@@ -294,9 +294,9 @@ const ProductDetails = () => {
                                         <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
                                             {related.material} • {related.size} ft
                                         </p>
-                                        <span className="font-bold text-amber-600 dark:text-amber-400 block">
+                                        {/* <span className="font-bold text-amber-600 dark:text-amber-400 block">
                                             ₹{related.price.toLocaleString()}
-                                        </span>
+                                        </span> */}
                                     </div>
                                 </div>
                             ))}

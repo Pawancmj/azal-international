@@ -92,12 +92,12 @@ const Collections = () => {
     }
 
     // Price filter
-    if (
+    /* if (
       product.price < filters.collections.price.min ||
       product.price > filters.collections.price.max
     ) {
       return false;
-    }
+    } */
 
     // Style filter
     if (
@@ -264,7 +264,7 @@ const Collections = () => {
               </div>
 
               {/* Price Filter */}
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Price Range</h3>
                 <div className="space-y-4">
                   <div>
@@ -296,7 +296,7 @@ const Collections = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Style Filter */}
               <div className="mb-4">
@@ -406,10 +406,10 @@ const Collections = () => {
                       <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-2 md:mb-4">
                         {product.material} • {product.size} ft
                       </p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-sm md:text-2xl font-bold text-amber-600 dark:text-amber-400">
+                      <div className="mt-auto flex items-center justify-end">
+                        {/* <span className="text-sm md:text-2xl font-bold text-amber-600 dark:text-amber-400">
                           ₹{product.price.toLocaleString()}
-                        </span>
+                        </span> */}
                         <button
                           onClick={() => handleViewDetails(product.id)}
                           className="hidden md:block px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm"

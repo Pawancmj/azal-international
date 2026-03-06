@@ -90,11 +90,11 @@ const QuickViewModal = ({ product, onClose }) => {
                 </div>
               </div>
 
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <span className="text-4xl font-bold text-gold-600 dark:text-gold-400">
                   ₹{product.price.toLocaleString()}
                 </span>
-              </div>
+              </div> */}
 
               <div className="mb-6">
                 <div className="flex flex-wrap gap-2">
