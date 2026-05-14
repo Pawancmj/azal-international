@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalStateContext";
-import logo from "../../assets/azal-logo.jpeg";
+import logo from "../../assets/azal-logo.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

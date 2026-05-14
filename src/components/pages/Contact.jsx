@@ -192,9 +192,9 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Email</h3>
                     <p className="text-gray-600 dark:text-gray-400">azalrugs@gmail.com</p>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    {/* <p className="text-gray-600 dark:text-gray-400">
                       export@azalinternational.com
-                    </p>
+                    </p> */}
                   </div>
                 </div>
 
@@ -214,8 +214,8 @@ const Contact = () => {
                   </svg>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Phone</h3>
-                    <p className="text-gray-600 dark:text-gray-400">+1 (555) 123-4567</p>
-                    <p className="text-gray-600 dark:text-gray-400">+44 20 1234 5678</p>
+                    <p className="text-gray-600 dark:text-gray-400">+91 9236298894</p>
+                    {/* <p className="text-gray-600 dark:text-gray-400">+44 20 1234 5678</p> */}
                   </div>
                 </div>
 
@@ -241,8 +241,8 @@ const Contact = () => {
                   </svg>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Address</h3>
-                    <p className="text-gray-600 dark:text-gray-400">123 Carpet District</p>
-                    <p className="text-gray-600 dark:text-gray-400">Dubai, United Arab Emirates</p>
+                    <p className="text-gray-600 dark:text-gray-400">Quazipur Bhadohi</p>
+                    <p className="text-gray-600 dark:text-gray-400">Uttar Pradesh, India</p>
                   </div>
                 </div>
               </div>

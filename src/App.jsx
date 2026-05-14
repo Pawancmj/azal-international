@@ -13,7 +13,7 @@ import Customization from "./components/pages/Customization";
 import Contact from "./components/pages/Contact";
 import ProductDetails from "./components/pages/ProductDetails";
 
-import FloatingEtsy from "./components/ui/FloatingEtsy";
+import FloatingWhatsapp from "./components/ui/FloatingWhatsapp"; // Add this import
 import SmoothScroll from "./components/ui/SmoothScroll";
 import CustomCursor from "./components/ui/CustomCursor";
 import ScrollToTop from "./components/ui/ScrollToTop"; // Add this import
@@ -41,7 +41,7 @@ function App() {
               </Routes>
             </main>
             <Footer />
-            <FloatingEtsy />
+            <FloatingWhatsapp />
           </div>
         </Router>
       </SmoothScroll>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/azal-logo.jpeg";
-import etsyLogo from "../../assets/etsy-logo.png";
+import logo from "../../assets/azal-logo.png";
+import whatsappLogo from "../../assets/whatsapp-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -50,16 +50,16 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://azalinternational.etsy.com/"
+                href="https://wa.me/9236298894"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-amber-500 hover:scale-110 transition-transform overflow-hidden shadow-sm"
-                title="Etsy Shop"
-                aria-label="Visit our Etsy Shop"
+                title="Contact us on Whatsapp"
+                aria-label="Contact us on Whatsapp"
               >
                 <img
-                  src={etsyLogo}
-                  alt="Etsy Logo"
+                  src={whatsappLogo}
+                  alt="Whatsapp Logo"
                   className="w-full h-full object-contain"
                   width="32"
                   height="32"
